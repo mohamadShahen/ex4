@@ -1,23 +1,11 @@
 
 #include "Player.h"
 
+using namespace std;
+
 //constructor of Player class
-Player::Player(const char* name):m_name(new char [strlen(name) + 1])
-{
-    strcpy(m_name,name);
-}
-
-//copy constructor for the Player class
-Player::Player(const Player& copy):m_name(new char [strlen(copy.m_name) + 1])
-{
-    strcpy(m_name, copy.m_name);
-}
-
-//destructor for Player class
-Player::~Player()
-{
-    delete [] m_name;
-}
+Player::Player(const string& name):m_name(name)
+{}
 
 //adds level to the player
 void Player::levelUp()
@@ -35,7 +23,7 @@ int Player::getLevel() const
 }
 
 //increases player's force with the inserted value
-void Player::buff(int value)
+void Player::buff(const int value)
 {
     if(value >= 0)
     {
@@ -43,14 +31,27 @@ void Player::buff(int value)
     }
 }
 
+//decreases player's force with the inserted value
+void Player::weaken(const int value)
+{
+    if(value >= 0)
+    {
+        m_force -= value;
+    }
+    if(m_force < 0)
+    {
+        m_force = 0;
+    }
+}
+
 //increases player's hp with the value inserted
-void Player::heal(int value)
+void Player::heal(const int value)
 {
     m_HP += value;
 }
 
 //decreases player's hp with the value inserted
-void Player::damage(int value)
+void Player::damage(const int value)
 {
     m_HP -= value;
 }
@@ -66,7 +67,7 @@ bool Player::isKnockedOut() const
 }
 
 //increases player's coins with the inserted value
-void Player::addCoins(int value)
+void Player::addCoins(const int value)
 {
     if(value >= 0)
     {
@@ -78,7 +79,7 @@ void Player::addCoins(int value)
 //returns true if he has the value and decreases
 //the inserted value and returns false if he doesn't
 //have the needed amount and doesn't do anything
-bool Player::pay(int value)
+bool Player::pay(const int value)
 {
     if(m_coins >= value)
     {
@@ -97,10 +98,10 @@ int Player::getAttackStrength() const
     return (m_level + m_force);
 }
 
-Warrior::Warrior(const char* name): Player(name)
+Warrior::Warrior(const string& name): Player(name)
 {}
 
-Warrior::Warrior(const Warrior & player): Player(player.m_name)
+Warrior::Warrior(const Warrior& player): Player(player.m_name)
 {}
 
 int Warrior::getAttackStrength() const
@@ -108,24 +109,24 @@ int Warrior::getAttackStrength() const
     return m_force*2 + m_level;
 }
 
-Ninja::Ninja(const char * name): Player(name)
+Ninja::Ninja(const string& name): Player(name)
 {}
 
-Ninja::Ninja(const Ninja & player): Player(player.m_name)
+Ninja::Ninja(const Ninja& player): Player(player.m_name)
 {}
 
-void Ninja::addCoins(int value)
+void Ninja::addCoins(const int value)
 {
     m_coins += value*2;
 }
 
-Healer::Healer(const char * name): Player(name)
+Healer::Healer(const string& name): Player(name)
 {}
 
-Healer::Healer(const Healer & player): Player(player.m_name)
+Healer::Healer(const Healer& player): Player(player.m_name)
 {}
 
-void Healer::heal (int value)
+void Healer::heal (const int value)
 {
     m_HP += value*2;
 }

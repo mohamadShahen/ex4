@@ -1,6 +1,3 @@
-//
-// Created by Tamer Khalifa on 29/11/2022.
-//
 
 #ifndef EX2_PLAYER_H
 #define EX2_PLAYER_H
@@ -11,37 +8,37 @@ const int STARTING_COINS = 10;
 const int LAST_LEVEL = 10;
 
 
-#include <string.h>
 #include "utilities.h"
 #include "HealthPoints.h"
 
 class Player{
 protected:
-    char* m_name;
+    std::string m_name;
     int m_level = FIRST_LEVEL;
     int m_force = DEFAULT_FORCE;
     int m_coins = STARTING_COINS;
     HealthPoints m_HP = HealthPoints();
 
 public:
-    Player (const char*);
-    Player(const Player&);
-    ~Player();
+    Player (const std::string&);
+    Player(const Player&) = default;
+    ~Player() = default;
     Player& operator=(const Player&) = default;
     void levelUp();
     int getLevel() const;
-    void buff(int);
-    virtual void heal (int);
-    void damage (int);
+    void buff(const int);
+    void weaken(const int);
+    virtual void heal (const int);
+    void damage (const int);
     bool isKnockedOut() const;
-    virtual void addCoins(int);
-    bool pay(int);
+    virtual void addCoins(const int);
+    bool pay(const int);
     virtual int getAttackStrength() const;
 };
 
 class Warrior : public Player{
 public:
-    Warrior(const char*);
+    Warrior(const std::string&);
     Warrior(const Warrior&);
     Warrior& operator=(const Warrior&) = default;
     ~Warrior() = default;
@@ -50,19 +47,19 @@ public:
 
 class Ninja : public Player{
 public:
-    Ninja(const char*);
+    Ninja(const std::string&);
     Ninja(const Ninja&);
     Ninja& operator=(const Ninja&) = default;
     ~Ninja() = default;
-    void addCoins(int) override;
+    void addCoins(const int) override;
 };
 
 class Healer : public Player{
 public:
-    Healer(const char*);
+    Healer(const std::string&);
     Healer(const Healer&);
     Healer& operator=(const Healer&) = default;
     ~Healer() = default;
-    void heal(int) override;
+    void heal(const int) override;
 };
 #endif //EX2_PLAYER_H
