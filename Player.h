@@ -4,38 +4,65 @@
 
 #ifndef EX2_PLAYER_H
 #define EX2_PLAYER_H
-#define DEFAULT_MAX_HP 100
-#define STARTING_LEVEL 1
-#define DEFAULT_FORCE 5
-#define MAX_LEVEL 10
+
+const int DEFAULT_FORCE = 5;
+const int FIRST_LEVEL = 1;
+const int STARTING_COINS = 10;
+const int LAST_LEVEL = 10;
 
 
 #include <string.h>
 #include "utilities.h"
+#include "HealthPoints.h"
 
 class Player{
-    char *m_name;
-    int m_level;
-    int m_force;
-    int m_maxHP;
-    int m_hp;
-    int m_coins;
+protected:
+    char* m_name;
+    int m_level = FIRST_LEVEL;
+    int m_force = DEFAULT_FORCE;
+    int m_coins = STARTING_COINS;
+    HealthPoints m_HP = HealthPoints();
 
 public:
-    Player(const char *name, int maxHP = DEFAULT_MAX_HP, int force = DEFAULT_FORCE);
+    Player (const char*);
     Player(const Player&);
     ~Player();
-    void printInfo() const;
+    Player& operator=(const Player&) = default;
     void levelUp();
     int getLevel() const;
-    void buff(int value);
-    void heal (int value);
-    void damage (int value);
+    void buff(int);
+    virtual void heal (int);
+    void damage (int);
     bool isKnockedOut() const;
-    void addCoins(int value);
-    bool pay(int value);
-    int getAttackStrength() const;
-
+    virtual void addCoins(int);
+    bool pay(int);
+    virtual int getAttackStrength() const;
 };
 
+class Warrior : public Player{
+public:
+    Warrior(const char*);
+    Warrior(const Warrior&);
+    Warrior& operator=(const Warrior&) = default;
+    ~Warrior() = default;
+    int getAttackStrength() const override;
+};
+
+class Ninja : public Player{
+public:
+    Ninja(const char*);
+    Ninja(const Ninja&);
+    Ninja& operator=(const Ninja&) = default;
+    ~Ninja() = default;
+    void addCoins(int) override;
+};
+
+class Healer : public Player{
+public:
+    Healer(const char*);
+    Healer(const Healer&);
+    Healer& operator=(const Healer&) = default;
+    ~Healer() = default;
+    void heal(int) override;
+};
 #endif //EX2_PLAYER_H
