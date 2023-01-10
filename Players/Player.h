@@ -1,6 +1,6 @@
 
-#ifndef EX2_PLAYER_H
-#define EX2_PLAYER_H
+#ifndef EX4_PLAYER_H
+#define EX4_PLAYER_H
 
 const int DEFAULT_FORCE = 5;
 const int FIRST_LEVEL = 1;
