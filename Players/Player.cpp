@@ -97,3 +97,8 @@ int Player::getAttackStrength() const
 {
     return (m_level + m_force);
 }
+
+string Player::getName() const
+{
+    return m_name;
+}
