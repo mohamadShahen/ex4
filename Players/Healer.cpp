@@ -13,3 +13,8 @@ void Healer::heal (const int value)
 {
     m_HP += value*2;
 }
+
+std::string Healer::getType() const
+{
+    return HEALER;
+}

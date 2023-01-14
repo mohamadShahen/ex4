@@ -12,3 +12,8 @@ int Warrior::getAttackStrength() const
 {
     return m_force*2 + m_level;
 }
+
+std::string Warrior::getType() const
+{
+    return WARRIOR;
+}

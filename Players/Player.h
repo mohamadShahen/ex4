@@ -2,14 +2,16 @@
 #ifndef EX2_PLAYER_H
 #define EX2_PLAYER_H
 
+#include "utilities.h"
+#include "HealthPoints.h"
+
 const int DEFAULT_FORCE = 5;
 const int FIRST_LEVEL = 1;
 const int STARTING_COINS = 10;
 const int LAST_LEVEL = 10;
-
-
-#include "utilities.h"
-#include "HealthPoints.h"
+const std::string NINJA = "Ninja";
+const std::string HEALER = "Healer";
+const std::string WARRIOR = "Warrior";
 
 class Player{
 protected:
@@ -35,6 +37,8 @@ public:
     bool pay(const int);
     virtual int getAttackStrength() const;
     std::string getName() const;
+    virtual std::string getType() const = 0;
+
 };
 
 #endif //EX2_PLAYER_H
