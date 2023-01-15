@@ -2,10 +2,8 @@
 #include "Warrior.h"
 using namespace std;
 
-Warrior::Warrior(const string& name): Player(name)
-{}
-
-Warrior::Warrior(const Warrior& player): Player(player.m_name)
+Warrior::Warrior(const string& name):
+Player(name)
 {}
 
 int Warrior::getAttackStrength() const

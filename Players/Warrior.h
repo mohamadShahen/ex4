@@ -7,7 +7,7 @@
 class Warrior : public Player{
 public:
     Warrior(const std::string&);
-    Warrior(const Warrior&);
+    Warrior(const Warrior&) = default;
     Warrior& operator=(const Warrior&) = default;
     ~Warrior() = default;
     int getAttackStrength() const override;

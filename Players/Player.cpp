@@ -4,7 +4,8 @@
 using namespace std;
 
 //constructor of Player class
-Player::Player(const string& name):m_name(name)
+Player::Player(const string& name):
+m_name(name)
 {}
 
 //adds level to the player

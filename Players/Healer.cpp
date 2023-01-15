@@ -3,10 +3,8 @@
 
 using namespace std;
 
-Healer::Healer(const string& name): Player(name)
-{}
-
-Healer::Healer(const Healer& player): Player(player.m_name)
+Healer::Healer(const string& name):
+Player(name)
 {}
 
 void Healer::heal (const int value)

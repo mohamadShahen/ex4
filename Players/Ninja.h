@@ -7,7 +7,7 @@
 class Ninja : public Player{
 public:
     Ninja(const std::string&);
-    Ninja(const Ninja&);
+    Ninja(const Ninja&) = default;
     Ninja& operator=(const Ninja&) = default;
     ~Ninja() = default;
     void addCoins(const int) override;

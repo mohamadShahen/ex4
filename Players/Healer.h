@@ -7,7 +7,7 @@
 class Healer : public Player{
 public:
     Healer(const std::string&);
-    Healer(const Healer&);
+    Healer(const Healer&) = default;
     Healer& operator=(const Healer&) = default;
     ~Healer() = default;
     void heal(const int) override;
