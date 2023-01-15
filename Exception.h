@@ -5,6 +5,7 @@
 #include "utilities.h"
 
 class DeckFileNotFound: public std::exception{
+    
 public:
     DeckFileNotFound() = default;
     DeckFileNotFound(const DeckFileNotFound&) = default;
@@ -15,7 +16,9 @@ public:
 };
 
 class DeckFileFormatError: public std::exception{
+    
     int m_line;
+    
 public:
     DeckFileFormatError(const int line):
     m_line(line)
@@ -28,6 +31,7 @@ public:
 };
 
 class DeckFileInvalidSize: public std::exception{
+    
 public:
     DeckFileInvalidSize() = default;
     DeckFileInvalidSize(const DeckFileInvalidSize&) = default;
