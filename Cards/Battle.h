@@ -7,12 +7,12 @@
 #include "Card.h"
 
 
-class Battle : public Card{
+class Battle : public Card {
 
 public:
     Battle(std::string name, int force, int damage, int loot);
     ~Battle() = default;
-    void applyEncounter(Player& player) const override;
+    virtual void applyEncounter(Player& player) const ;
 
 protected:
     int m_force;

@@ -15,14 +15,14 @@ void Battle::applyEncounter(Player &player) const {
     if (player.getAttackStrength() >= m_force){
         player.levelUp();
         player.addCoins(m_loot);
-        printWinBattle(player.m_name, m_name);
+        printWinBattle(player.m_name, m_type);
     }
     else{
-        if (m_name == WITCH){
+        if (m_type == WITCH){
             player.weaken();
         }
         player.damage(m_damage);
-        printLossBattle(player.m_name, m_name);
+        printLossBattle(player.m_name, m_type);
 
     }
 }

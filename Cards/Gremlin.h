@@ -10,6 +10,6 @@ class Gremlin : public Battle{
 public:
     Gremlin();
     ~Gremlin() = default;
-    void applyEncounter(Player& player) const override;
+    //virtual void applyEncounter(Player& player) const override;
 };
 #endif //EX4_GREMLIN_H

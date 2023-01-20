@@ -8,8 +8,13 @@
 const std::string HEALER = "Healer";
 const std::string NINJA = "Ninja";
 const std::string WARRIOR = "Warrior";
+const std::string TREASURE = "Treasure";
+const std::string MERCHANT = "Merchant";
+const std::string WELL = "Well";
+const std::string BARFIGHT = "Barfight";
+const std::string MANA = "Mana";
 
-const int MANA = 10;
+const int MANA_VALUE = 10;
 const int BARFIGHT_DAMAGE = 10;
 const int WELL_DAMAGE = 10;
 
@@ -37,15 +42,20 @@ const int DRAGON_DAMAGE = 100;
 
 class Card {
 public:
-    Card(const std::string name);
+    Card(std::string type);
     Card(const Card&) = default;
+
     ~Card() = default;
     Card& operator=(const Card& other) = default;
-    Card& operator[](int index);
-    virtual void applyEncounter(Player& player) const = 0;
+    //Card& operator[](int index);
+//    virtual void applyEncounter(Player& player) const;
 
 protected:
-    std::string m_name;
+    std::string m_type;
+
+private:
+    Card *m_card;
+    static Card* createCard(std::string type);
 
 };
 

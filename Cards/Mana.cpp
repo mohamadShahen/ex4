@@ -9,7 +9,7 @@ Mana::Mana() : Card(m_name){}
 void Mana::applyEncounter(Player &player) const
 {
     if (player.getType = HEALER){
-        player.heal(MANA);
+        player.heal(MANA_VALUE);
         printManaMessage(true);
         return;
     }

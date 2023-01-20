@@ -12,7 +12,7 @@ class Witch : public Battle{
 public:
     Witch();
     ~Witch() = default;
-    void applyEncounter(Player& player) const override;
+    //void applyEncounter(Player& player) const override;
 };
 
 

@@ -7,11 +7,11 @@
 #include "Card.h"
 
 class Well : public Card{
-    std::string m_name = "Well";
+    std::string m_type = "Well";
 
 public:
     Well();
     ~Well();
     void applyEncounter(Player &player) const override;
-}
+};
 #endif //EX4_WELL_H

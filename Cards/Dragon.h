@@ -10,7 +10,7 @@ class Dragon : public Battle{
 public:
     Dragon();
     ~Dragon() = default;
-    void applyEncounter(Player& player) const override;
+    //void applyEncounter(Player& player) const override;
 };
 
 #endif //EX4_DRAGON_H
