@@ -11,7 +11,7 @@ public:
     Warrior& operator=(const Warrior&) = default;
     ~Warrior() = default;
     int getAttackStrength() const override;
-    std::string getType() const override;
+    virtual std::string getType() const override;
 };
 
 #endif //PLAYER_CPP_WARRIOR_H

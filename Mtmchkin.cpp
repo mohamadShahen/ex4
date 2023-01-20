@@ -23,27 +23,32 @@ Mtmchkin::Mtmchkin(const string &fileName)
     }
     for (int i = 0; i < size; ++i) {
         printInsertPlayerMessage();
-        string nameAndType,name,type;
-//        int j = 0;
-//        for (cin >> name; name[j] != NULL ; ++j) {
-//            if(name[j] < 'a' || name[j] > 'z'){
-//                j = 0;
-//                printInvalidName();
-//                cin >> name;
-//            }
-//        }
-//        for (cin >> type; type != NINJA && type != HEALER && type != WARRIOR ; cin >> type) {
-//            printInvalidClass();
-//        }
+        string name,type;
+        for (cin >> name,cin >> type;;cin >> name,cin >> type)
+        {
+            for (int j = 0; name[j] != NULL ; ++j) {
+                if (name[j] < 'a' || name[j] > 'z') {
+                    printInvalidName();
+                    continue;
+                }
+            }
+            if (type != NINJA && type != HEALER && type != WARRIOR){
+                printInvalidClass();
+                continue;
+            }
+            break;
+        }
         if (type == NINJA) {
-            m_team.pushBack(dynamic_cast <Player>(Ninja(name)));
+            Ninja* ptr = new Ninja(name);
+            m_team.pushBack(dynamic_cast <Player*> (ptr));
         }
         if (type == WARRIOR) {
-            m_team.pushBack(Warrior(name));
+            Warrior* ptr = new Warrior(name);
+            m_team.pushBack(dynamic_cast <Player*> (ptr));
         }
         if (type == HEALER) {
-            m_team.pushBack(Healer(name));
+            Healer* ptr = new Healer(name);
+            m_team.pushBack(dynamic_cast <Player*> (ptr));
         }
     }
-
 }

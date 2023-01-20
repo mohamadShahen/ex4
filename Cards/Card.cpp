@@ -7,6 +7,7 @@
 #include "Well.h"
 #include "Barfight.h"
 #include "Mana.h"
+
 using namespace std;
 
 //constructor for Card class

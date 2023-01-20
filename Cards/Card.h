@@ -2,12 +2,9 @@
 #define EX2_Card_H
 
 #include <string>
-#include "Player.h"
+#include "Players/Player.h"
 #include "utilities.h"
 
-const std::string HEALER = "Healer";
-const std::string NINJA = "Ninja";
-const std::string WARRIOR = "Warrior";
 const std::string TREASURE = "Treasure";
 const std::string MERCHANT = "Merchant";
 const std::string WELL = "Well";
@@ -47,8 +44,7 @@ public:
 
     ~Card() = default;
     Card& operator=(const Card& other) = default;
-    //Card& operator[](int index);
-//    virtual void applyEncounter(Player& player) const;
+    virtual void applyEncounter(Player& player) const;
 
 protected:
     std::string m_type;

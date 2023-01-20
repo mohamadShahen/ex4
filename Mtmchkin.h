@@ -3,9 +3,9 @@
 
 
 #include "utilities.h"
-#include "Player.h"
+#include "Players/Player.h"
 #include "Cards/Card.h"
-#include "Queue.h"
+#include "tool/Queue.h"
 
 class Mtmchkin{
 
@@ -55,7 +55,7 @@ public:
 
 private:
     Queue<Card> m_deck;
-    Queue<Player> m_team;
+    Queue<Player*> m_team;
 };
 
 

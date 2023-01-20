@@ -4,6 +4,9 @@
 
 #include "utilities.h"
 #include "HealthPoints.h"
+#include "Ninja.h"
+#include "Warrior.h"
+#include "Healer.h"
 
 const int DEFAULT_FORCE = 5;
 const int FIRST_LEVEL = 1;
