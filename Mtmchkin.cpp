@@ -14,7 +14,7 @@ Mtmchkin::Mtmchkin(const string &fileName)
         file.close();
     }
     else{
-        throw DeckFileNotFound;
+        throw DeckFileNotFound();
     }
     printEnterTeamSizeMessage();
     int size;
@@ -24,8 +24,25 @@ Mtmchkin::Mtmchkin(const string &fileName)
     for (int i = 0; i < size; ++i) {
         printInsertPlayerMessage();
         string nameAndType,name,type;
-        for (cin >> name, cin >> type; type != NINJA && type != HEALER && type != WARRIOR ; cin >> name, cin >> type) {
-            printInvalidClass();
+//        int j = 0;
+//        for (cin >> name; name[j] != NULL ; ++j) {
+//            if(name[j] < 'a' || name[j] > 'z'){
+//                j = 0;
+//                printInvalidName();
+//                cin >> name;
+//            }
+//        }
+//        for (cin >> type; type != NINJA && type != HEALER && type != WARRIOR ; cin >> type) {
+//            printInvalidClass();
+//        }
+        if (type == NINJA) {
+            m_team.pushBack(dynamic_cast <Player>(Ninja(name)));
+        }
+        if (type == WARRIOR) {
+            m_team.pushBack(Warrior(name));
+        }
+        if (type == HEALER) {
+            m_team.pushBack(Healer(name));
         }
     }
 
