@@ -1,5 +1,6 @@
 
 #include "Player.h"
+#include "../utilities.h"
 
 using namespace std;
 
@@ -106,8 +107,13 @@ bool Player::pay(const int& value)
 }
 
 //returns player's attack strength(force + level)
-const int& Player::getAttackStrength() const
+int Player::getAttackStrength() const
 {
     return (m_level + m_force);
 }
 
+std::ostream& operator<<(std::ostream& os, const Player& player)
+{
+    printPlayerDetails(os, player.getName(), player.getType(), player.m_level, player.m_force, player.m_HP.getHP(), player.m_coins);
+    return os;
+}

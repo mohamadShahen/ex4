@@ -2,7 +2,7 @@
 #ifndef EX4_WITCH_H
 #define EX4_WITCH_H
 
-#include "Battle.h"
+#include "Card.h"
 
 const int WITCH_FORCE = 11;
 const int WITCH_LOOT = 2;

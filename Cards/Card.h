@@ -23,10 +23,12 @@ public:
     Card& operator=(const Card& other) = default;
     virtual void applyEncounter(Player& player) const = 0;
     virtual const std::string& getType() const = 0;
+    friend std::ostream& operator<<(std::ostream& os, Card& card);
 
 };
 
 class Battle : public Card {
+
 
 public:
     Battle(const std::string& name, const int& force, const int& damage, const int& loot);
@@ -36,6 +38,7 @@ protected:
     int m_force;
     int m_damage;
     int m_loot;
+    friend std::ostream& operator<<(std::ostream& os, Battle& card);
 
 };
 

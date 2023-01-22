@@ -158,3 +158,8 @@ int operator-(const int& value, HealthPoints& health) {
     int temp = value - health.m_currentHP;
     return temp;
 }
+
+const int& HealthPoints::getHP() const
+{
+    return m_currentHP;
+}

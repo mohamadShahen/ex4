@@ -55,11 +55,11 @@ bool compareFiles(const string &filename1, const string &filename2)
 {
     string line1,line2;
     fstream file1(filename1),file2(filename2);
-    if( !file2){
+    if(!(file2.is_open())){
          cerr<<"Error opening file 2"<<std::endl;
          return false;
     }
-	if(!file1 ){
+	if(!(file1.is_open())){
          cerr<<"Error opening file 1"<<std::endl;
          return false;
     }

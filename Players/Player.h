@@ -2,7 +2,6 @@
 #ifndef EX2_PLAYER_H
 #define EX2_PLAYER_H
 
-#include "../utilities.h"
 #include "../tool/HealthPoints.h"
 #include <memory>
 
@@ -31,7 +30,7 @@ public:
     const int& getLevel () const;
     const int& getCoins () const;
     const std::string& getName () const;
-    virtual const int& getAttackStrength () const;
+    virtual int getAttackStrength () const;
     virtual const std::string& getType () const = 0;
     void buff (const int&);
     void weaken (const int&);
@@ -40,6 +39,7 @@ public:
     virtual void addCoins (const int&);
     bool pay (const int&);
     bool isKnockedOut() const;
+    friend std::ostream& operator<<(std::ostream& os, const Player& player);
 
 };
 

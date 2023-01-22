@@ -2,7 +2,7 @@
 #ifndef EX4_GREMLIN_H
 #define EX4_GREMLIN_H
 
-#include "Battle.h"
+#include "Card.h"
 
 const int GREMLIN_FORCE = 5;
 const int GREMLIN_LOOT = 2;

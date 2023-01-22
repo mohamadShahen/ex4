@@ -10,7 +10,7 @@ public:
     Warrior(const Warrior&) = default;
     Warrior& operator=(const Warrior&) = default;
     ~Warrior() = default;
-    const int& getAttackStrength() const override;
+    int getAttackStrength() const override;
     const std::string& getType() const override;
 };
 

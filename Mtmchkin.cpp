@@ -5,6 +5,13 @@ using namespace std;
 
 void rotate(shared_ptr<Player>* leaderboard, int source, int dest);
 
+void swapPtr(shared_ptr<Player> one, shared_ptr<Player> two)
+{
+    shared_ptr<Player> temp = one;
+    one = two;
+    two = temp;
+}
+
 shared_ptr<Player> createPlayer(const std::string& name, const std::string& type)
 {
     if (type == NINJA){
@@ -16,9 +23,10 @@ shared_ptr<Player> createPlayer(const std::string& name, const std::string& type
     if (type == WARRIOR){
         return shared_ptr<Player>(new Warrior(name));
     }
+    throw std::invalid_argument("invalid argument");
 }
 
-void insertPlayers(Queue<shared_ptr<Player>>& team, shared_ptr<Player>* leaderboard)
+void insertPlayers(Queue<shared_ptr<Player>>& team, shared_ptr<Player>*& leaderboard)
 {
     printEnterTeamSizeMessage();
     char size;
@@ -31,11 +39,16 @@ void insertPlayers(Queue<shared_ptr<Player>>& team, shared_ptr<Player>* leaderbo
         string name,type;
         for (cin >> name,cin >> type;;cin >> name,cin >> type)
         {
-            for (int j = 0; i < name.length() ; ++j) {
+            bool check = true;
+            for (int j = 0; name[j] ; ++j) {
                 if (!(name[j] >= 'a' && name[j] <= 'z') && !(name[j] >= 'A' && name[j] <= 'Z')) {
+                    check = false;
                     printInvalidName();
-                    continue;
+                    break;
                }
+            }
+            if(check == false){
+                continue;
             }
             if (type != NINJA && type != HEALER && type != WARRIOR){
                 printInvalidClass();
@@ -44,7 +57,7 @@ void insertPlayers(Queue<shared_ptr<Player>>& team, shared_ptr<Player>* leaderbo
             break;
         }
         team.pushBack(createPlayer(name,type));
-        *(leaderboard + i) = team.back();
+        leaderboard[i] = team.back();
     }
 }
 
@@ -74,6 +87,7 @@ shared_ptr<Card> createCard(const std::string& type)
     if (type == MANA){
         return shared_ptr<Card>(new Mana());
     }
+    throw std::invalid_argument("invalid argument");
 }
 
 void insertCards(Queue<shared_ptr<Card>>& deck, const string& fileName)
@@ -82,7 +96,7 @@ void insertCards(Queue<shared_ptr<Card>>& deck, const string& fileName)
     if (file.is_open())
     {
         string line;
-        int lineNum = 1;
+        int lineNum = 0;
         while (getline(file, line))
         {
             lineNum++;
@@ -109,6 +123,7 @@ void insertCards(Queue<shared_ptr<Card>>& deck, const string& fileName)
 //constructor of game class
 Mtmchkin::Mtmchkin(const string& fileName)
 {
+    printStartGameMessage();
     insertCards(m_deck,fileName);
     insertPlayers(m_team,m_leaderboard);
 }
@@ -145,7 +160,7 @@ void Mtmchkin::playRound()
 bool Mtmchkin::isGameOver() const
 {
     for (shared_ptr<Player> player : m_team){
-        if(!(player->isKnockedOut()) || player->getLevel() < LAST_LEVEL){
+        if(!(player->isKnockedOut()) && player->getLevel() < LAST_LEVEL){
             return false;
         }
     }
@@ -164,6 +179,7 @@ int Mtmchkin::getPlayerRank(const shared_ptr<Player> wanted) const
         }
         i++;
     }
+    throw std::invalid_argument("invalid argument");
     //not sure whether there should be an exception here for if the player entered exists in the team
 }
 
@@ -184,12 +200,12 @@ void rotate(shared_ptr<Player>* leaderboard, int source, int dest)
     }
     if (source < dest) {
         for (int i = source; i < dest; ++i) {
-            swap(*(leaderboard + source), *(leaderboard + source + 1));
+            leaderboard[source].swap(leaderboard[source + 1]);
         }
     }
     if (source > dest) {
         for (int i = source; i > dest; --i) {
-            swap(*(leaderboard + source), *(leaderboard + source - 1));
+            leaderboard[source].swap(leaderboard[source - 1]);
         }
     }
 }

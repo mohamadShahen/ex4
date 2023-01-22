@@ -42,6 +42,7 @@ public:
     bool operator>=(const int) const;
     bool operator<=(const HealthPoints&) const;
     bool operator<=(const int) const;
+    const int& getHP() const;
 };
 
 #endif //EX3_HEALTHPOINTS_H

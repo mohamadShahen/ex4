@@ -2,7 +2,7 @@
 #ifndef EX4_DRAGON_H
 #define EX4_DRAGON_H
 
-#include "Battle.h"
+#include "Card.h"
 
 const int DRAGON_FORCE = 25;
 const int DRAGON_LOOT = 1000;

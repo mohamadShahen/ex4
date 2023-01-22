@@ -17,6 +17,7 @@
 #include "Cards/Well.h"
 #include "Cards/Witch.h"
 #include "tool/Queue.h"
+#include "tool/HealthPoints.h"
 #include "Exception.h"
 #include <memory>
 #include <queue>
