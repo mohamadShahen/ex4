@@ -1,10 +1,7 @@
-//
-// Created by Tamer Khalifa on 14/01/2023.
-//
 
 #include "Well.h"
 
-Well::Well() : Card(m_name){}
+Well::Well() : Card(WELL){}
 
 void Well::applyEncounter(Player &player) const
 {

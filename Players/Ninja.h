@@ -6,12 +6,12 @@
 
 class Ninja : public Player{
 public:
-    Ninja(const std::string&);
+    explicit Ninja(const std::string&);
     Ninja(const Ninja&) = default;
     Ninja& operator=(const Ninja&) = default;
     ~Ninja() = default;
-    void addCoins(const int) override;
-    virtual std::string getType() const override;
+    void addCoins(const int&) override;
+    std::string getType() const override;
 };
 
 #endif //PLAYER_CPP_NINJA_H

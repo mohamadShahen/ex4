@@ -1,3 +1,4 @@
+
 #include "Card.h"
 #include "Gremlin.h"
 #include "Witch.h"
@@ -15,31 +16,31 @@ using namespace std;
 
 //method to apply encounter depending on each card type
 
-Card* Card::createCard(std::string type)
+unique_ptr<Card> Card::createCard(std::string type)
 {
     if (type == GREMLIN) {
-        return dynamic_cast<Card*> (new Gremlin());
+        return unique_ptr<Card>(new Gremlin());
     }
     if (type == WITCH){
-        return dynamic_cast<Card*> (new Witch());
+        return unique_ptr<Card>(new Witch());
     }
     if (type == DRAGON){
-        return dynamic_cast<Card*> (new Dragon());
+        return unique_ptr<Card>(new Dragon());
     }
     if (type == TREASURE){
-        return dynamic_cast<Card*> (new Treasure());
+        return unique_ptr<Card> (new Treasure());
     }
     if (type == MERCHANT){
-        return dynamic_cast<Card*> (new Merchant());
+        return unique_ptr<Card> (new Merchant());
     }
     if (type == WELL){
-        return dynamic_cast<Card*> (new Well());
+        return unique_ptr<Card>(new Well());
     }
     if (type == BARFIGHT){
-        return dynamic_cast<Card*> (new Barfight());
+        return unique_ptr<Card>(new Barfight());
     }
     if (type == MANA){
-        return dynamic_cast<Card*> (new Mana());
+        return unique_ptr<Card>(new Mana());
     }
 }
 

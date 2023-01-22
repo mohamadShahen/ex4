@@ -1,6 +1,3 @@
-//
-// Created by Tamer Khalifa on 13/01/2023.
-//
 
 #include "Dragon.h"
 Dragon::Dragon() : Battle(m_type, m_force, m_damage, m_loot){}

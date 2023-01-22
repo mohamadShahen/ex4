@@ -2,11 +2,9 @@
 #ifndef EX2_PLAYER_H
 #define EX2_PLAYER_H
 
-#include "utilities.h"
-#include "HealthPoints.h"
-#include "Ninja.h"
-#include "Warrior.h"
-#include "Healer.h"
+#include "../utilities.h"
+#include "../tool/HealthPoints.h"
+#include <memory>
 
 const int DEFAULT_FORCE = 5;
 const int FIRST_LEVEL = 1;
@@ -19,10 +17,10 @@ const std::string WARRIOR = "Warrior";
 class Player{
 protected:
     std::string m_name;
-    int m_level = FIRST_LEVEL;
-    int m_force = DEFAULT_FORCE;
-    int m_coins = STARTING_COINS;
-    HealthPoints m_HP = HealthPoints();
+    int m_level;
+    int m_force;
+    int m_coins;
+    HealthPoints m_HP;
 
 public:
     Player (const std::string&);
@@ -31,13 +29,13 @@ public:
     Player& operator=(const Player&) = default;
     void levelUp();
     int getLevel() const;
-    void buff(const int);
-    void weaken(const int);
-    virtual void heal (const int);
-    void damage (const int);
+    void buff(const int&);
+    void weaken(const int&);
+    virtual void heal (const int&);
+    void damage (const int&);
     bool isKnockedOut() const;
-    virtual void addCoins(const int);
-    bool pay(const int);
+    virtual void addCoins(const int&);
+    bool pay(const int&);
     virtual int getAttackStrength() const;
     std::string getName() const;
     virtual std::string getType() const = 0;

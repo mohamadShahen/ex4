@@ -1,6 +1,4 @@
-//
-// Created by Tamer Khalifa on 13/01/2023.
-//
+
 #include "Battle.h"
 using namespace std;
 
@@ -15,14 +13,13 @@ void Battle::applyEncounter(Player &player) const {
     if (player.getAttackStrength() >= m_force){
         player.levelUp();
         player.addCoins(m_loot);
-        printWinBattle(player.m_name, m_type);
+        printWinBattle(player.getName(), m_type);
     }
     else{
         if (m_type == WITCH){
-            player.weaken();
+            player.weaken(WITCH_FORCE_LOSS);
         }
         player.damage(m_damage);
-        printLossBattle(player.m_name, m_type);
-
+        printLossBattle(player.getName(), m_type);
     }
 }

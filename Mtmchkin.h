@@ -4,8 +4,13 @@
 
 #include "utilities.h"
 #include "Players/Player.h"
+#include "players/Ninja.h"
+#include "players/Warrior.h"
+#include "players/Healer.h"
 #include "Cards/Card.h"
 #include "tool/Queue.h"
+#include <memory>
+#include <queue>
 
 class Mtmchkin{
 
@@ -55,9 +60,10 @@ public:
 
 private:
     Queue<Card> m_deck;
-    Queue<Player*> m_team;
+    Queue<std::shared_ptr<Player>> m_team;
+    int m_rounds = 1;
+    std::shared_ptr<Player>* m_leaderboard;
 };
-
 
 
 #endif /* MTMCHKIN_H_ */

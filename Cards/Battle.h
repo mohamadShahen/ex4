@@ -1,6 +1,3 @@
-//
-// Created by Tamer Khalifa on 13/01/2023.
-//
 
 #ifndef EX4_BATTLE_H
 #define EX4_BATTLE_H

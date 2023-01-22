@@ -7,7 +7,7 @@ Ninja::Ninja(const string& name):
 Player(name)
 {}
 
-void Ninja::addCoins(const int value)
+void Ninja::addCoins(const int& value)
 {
     m_coins += value*2;
 }

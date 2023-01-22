@@ -1,12 +1,9 @@
-//
-// Created by Tamer Khalifa on 13/01/2023.
-//
 
 #include "Merchant.h"
 
 using namespace std;
 
-Merchant::Merchant():Card("Merchant") {}
+Merchant::Merchant():Card(MERCHANT) {}
 
 int Merchant::healthPotion() const
 {

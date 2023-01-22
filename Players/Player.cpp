@@ -5,7 +5,7 @@ using namespace std;
 
 //constructor of Player class
 Player::Player(const string& name):
-m_name(name)
+m_name(name), m_force(DEFAULT_FORCE), m_level(FIRST_LEVEL), m_coins(STARTING_COINS), m_HP()
 {}
 
 //adds level to the player
@@ -24,7 +24,7 @@ int Player::getLevel() const
 }
 
 //increases player's force with the inserted value
-void Player::buff(const int value)
+void Player::buff(const int& value)
 {
     if(value >= 0)
     {
@@ -33,7 +33,7 @@ void Player::buff(const int value)
 }
 
 //decreases player's force with the inserted value
-void Player::weaken(const int value)
+void Player::weaken(const int& value)
 {
     if(value >= 0)
     {
@@ -46,13 +46,13 @@ void Player::weaken(const int value)
 }
 
 //increases player's hp with the value inserted
-void Player::heal(const int value)
+void Player::heal(const int& value)
 {
     m_HP += value;
 }
 
 //decreases player's hp with the value inserted
-void Player::damage(const int value)
+void Player::damage(const int& value)
 {
     m_HP -= value;
 }
@@ -68,7 +68,7 @@ bool Player::isKnockedOut() const
 }
 
 //increases player's coins with the inserted value
-void Player::addCoins(const int value)
+void Player::addCoins(const int& value)
 {
     if(value >= 0)
     {
@@ -80,7 +80,7 @@ void Player::addCoins(const int value)
 //returns true if he has the value and decreases
 //the inserted value and returns false if he doesn't
 //have the needed amount and doesn't do anything
-bool Player::pay(const int value)
+bool Player::pay(const int& value)
 {
     if(m_coins >= value)
     {

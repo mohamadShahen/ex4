@@ -1,3 +1,4 @@
+
 #ifndef EX2_Card_H
 #define EX2_Card_H
 
@@ -50,8 +51,8 @@ protected:
     std::string m_type;
 
 private:
-    Card *m_card;
-    static Card* createCard(std::string type);
+    std::unique_ptr<Card> m_card;
+    static std::unique_ptr<Card> createCard(std::string type);
 
 };
 

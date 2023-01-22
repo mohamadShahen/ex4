@@ -42,9 +42,11 @@ public:
     Queue& operator=(const Queue&);
     Queue& pushBack(const T&);
     T& front();
+    T& back();
     const T& front() const;
+    const T& back() const;
     Queue& popFront();
-    const int size() const;
+    const int& size() const;
     Iterator begin();
     Iterator end();
     ConstIterator begin() const;
@@ -57,20 +59,18 @@ public:
 template<class T>
 
 class Queue<T>::Iterator{
+
     Node<T> *m_ptr;
 
 public:
-
-    class InvalidOperation{};
-
     Iterator(Node<T> *ptr = nullptr);
     Iterator(const Iterator&) = default;
     ~Iterator() = default;
     Iterator& operator=(const Iterator&) = default;
-    Iterator& operator++();
     bool operator!=(const Iterator&) const;
     T& operator*() const;
-
+    Iterator& operator++();
+    class InvalidOperation{};
 };
 
 //constant iterator Class
@@ -109,7 +109,7 @@ Queue<T>::Queue(const Queue<T>& queue)
     {
         throw EmptyQueue();
     }
-    for (ConstIterator it = queue.begin();it != queue.end();++it)
+    for (ConstIterator it : queue)
     {
         try
         {
@@ -117,7 +117,7 @@ Queue<T>::Queue(const Queue<T>& queue)
         }
         catch (std::bad_alloc& e)
         {
-            while(m_size)
+            while(m_size > 0)
             {
                 popFront();
             }
@@ -134,7 +134,7 @@ Queue<T>& Queue<T>::operator=(const Queue<T>& queue){
         return *this;
     }
     Queue<T> temp;
-    for(ConstIterator it = queue.begin(); it != queue.end(); ++it)
+    for(ConstIterator it : queue)
     {
         try
         {
@@ -201,6 +201,17 @@ T& Queue<T>::front()
 
 template <class T>
 
+T& Queue<T>::back()
+{
+    if(m_size == 0)
+    {
+        throw Queue<T>::EmptyQueue();
+    }
+    return m_back->m_data;
+}
+
+template <class T>
+
 const T& Queue<T>::front() const
 {
     if(m_size == 0)
@@ -208,6 +219,17 @@ const T& Queue<T>::front() const
         throw Queue<T>::EmptyQueue();
     }
     return m_front->m_data;
+}
+
+template <class T>
+
+const T& Queue<T>::back() const
+{
+    if(m_size == 0)
+    {
+        throw Queue<T>::EmptyQueue();
+    }
+    return m_back->m_data;
 }
 
 template <class T>
@@ -233,7 +255,7 @@ Queue<T>& Queue<T>::popFront(){
 
 template <class T>
 
-const int Queue<T>::size() const
+const int& Queue<T>::size() const
 {
     return m_size;
 }

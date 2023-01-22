@@ -1,6 +1,3 @@
-//
-// Created by Tamer Khalifa on 14/01/2023.
-//
 
 #ifndef EX4_WELL_H
 #define EX4_WELL_H

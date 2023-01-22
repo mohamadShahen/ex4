@@ -1,10 +1,7 @@
-//
-// Created by Tamer Khalifa on 14/01/2023.
-//
 
 #include "Barfight.h"
 
-Barfight::Barfight() : Card(m_name){}
+Barfight::Barfight() : Card(BARFIGHT){}
 
 void Barfight::applyEncounter(Player &player) const
 {

@@ -1,6 +1,4 @@
-//
-// Created by Tamer Khalifa on 13/01/2023.
-//
+
 #include "Gremlin.h"
 
 Gremlin::Gremlin() : Battle(GREMLIN, GREMLIN_FORCE, GREMLIN_DAMAGE, GREMLIN_LOOT){}

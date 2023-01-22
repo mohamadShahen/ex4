@@ -1,12 +1,9 @@
-//
-// Created by Tamer Khalifa on 13/01/2023.
-//
 
 #include "Witch.h"
 
-Witch::Witch() : Battle(WITCH, WITCH_FORCE, WITCH_DAMAGE, WITCH_LOOT){
-    m_forceLoss = WITCH_FORCE_LOSS;
-}
+Witch::Witch():
+Battle(WITCH, WITCH_FORCE, WITCH_DAMAGE, WITCH_LOOT)
+{}
 
 //void Witch::applyEncounter(Player &player) const
 //{
