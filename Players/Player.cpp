@@ -18,9 +18,21 @@ void Player::levelUp()
 }
 
 //returns which level is the player at
-int Player::getLevel() const
+const int& Player::getLevel() const
 {
     return m_level;
+}
+
+//returns the amount of coins with the player
+const int& Player::getCoins() const
+{
+    return m_coins;
+}
+
+//returns the player's name
+const string& Player::getName() const
+{
+    return m_name;
 }
 
 //increases player's force with the inserted value
@@ -94,12 +106,8 @@ bool Player::pay(const int& value)
 }
 
 //returns player's attack strength(force + level)
-int Player::getAttackStrength() const
+const int& Player::getAttackStrength() const
 {
     return (m_level + m_force);
 }
 
-string Player::getName() const
-{
-    return m_name;
-}

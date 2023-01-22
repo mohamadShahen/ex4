@@ -3,20 +3,13 @@
 
 using namespace std;
 
-Merchant::Merchant():Card(MERCHANT) {}
-
-int Merchant::healthPotion() const
-{
-    return m_heal;
-}
-int Merchant::forceBoost() const
-{
-    return m_force;
-}
+Merchant::Merchant():
+Card()
+{}
 
 void Merchant::applyEncounter(Player &player) const
 {
-    printMerchantInitialMessageForInteractiveEncounter(player.getName());
+    printMerchantInitialMessageForInteractiveEncounter(cout ,player.getName(), player.getCoins());
     int i = -1;
     cin >> i;
     while(i < BUY_NOTHING || i > FORCE_BOOST){
@@ -39,9 +32,9 @@ void Merchant::applyEncounter(Player &player) const
     else{
         printMerchantInsufficientCoins(cout);
     }
+}
 
-
-
-
-
+const string& Merchant::getType() const
+{
+    return MERCHANT;
 }

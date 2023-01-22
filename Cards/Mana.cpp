@@ -1,7 +1,9 @@
 
 #include "Mana.h"
 
-Mana::Mana() : Card(MANA){}
+Mana::Mana() :
+Card()
+{}
 
 void Mana::applyEncounter(Player &player) const
 {
@@ -11,6 +13,9 @@ void Mana::applyEncounter(Player &player) const
         return;
     }
     printManaMessage(false);
-    return;
 }
 
+const std::string& Mana::getType() const
+{
+    return MANA;
+}

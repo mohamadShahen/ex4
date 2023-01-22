@@ -11,7 +11,7 @@ public:
     Healer& operator=(const Healer&) = default;
     ~Healer() = default;
     void heal(const int&) override;
-    std::string getType() const override;
+    const std::string& getType() const override;
 };
 
 #endif //PLAYER_CPP_HEALER_H

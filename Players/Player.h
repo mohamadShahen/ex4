@@ -24,21 +24,22 @@ protected:
 
 public:
     Player (const std::string&);
-    Player(const Player&) = default;
-    ~Player() = default;
-    Player& operator=(const Player&) = default;
-    void levelUp();
-    int getLevel() const;
-    void buff(const int&);
-    void weaken(const int&);
+    Player (const Player&) = default;
+    ~Player () = default;
+    Player& operator= (const Player&) = default;
+    void levelUp ();
+    const int& getLevel () const;
+    const int& getCoins () const;
+    const std::string& getName () const;
+    virtual const int& getAttackStrength () const;
+    virtual const std::string& getType () const = 0;
+    void buff (const int&);
+    void weaken (const int&);
     virtual void heal (const int&);
     void damage (const int&);
+    virtual void addCoins (const int&);
+    bool pay (const int&);
     bool isKnockedOut() const;
-    virtual void addCoins(const int&);
-    bool pay(const int&);
-    virtual int getAttackStrength() const;
-    std::string getName() const;
-    virtual std::string getType() const = 0;
 
 };
 

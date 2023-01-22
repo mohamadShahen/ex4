@@ -11,7 +11,7 @@ public:
     Ninja& operator=(const Ninja&) = default;
     ~Ninja() = default;
     void addCoins(const int&) override;
-    std::string getType() const override;
+    const std::string& getType() const override;
 };
 
 #endif //PLAYER_CPP_NINJA_H

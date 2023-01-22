@@ -4,14 +4,24 @@
 
 #include "utilities.h"
 #include "Players/Player.h"
-#include "players/Ninja.h"
-#include "players/Warrior.h"
-#include "players/Healer.h"
+#include "Players/Ninja.h"
+#include "Players/Warrior.h"
+#include "Players/Healer.h"
 #include "Cards/Card.h"
+#include "Cards/Barfight.h"
+#include "Cards/Dragon.h"
+#include "Cards/Gremlin.h"
+#include "Cards/Mana.h"
+#include "Cards/Merchant.h"
+#include "Cards/Treasure.h"
+#include "Cards/Well.h"
+#include "Cards/Witch.h"
 #include "tool/Queue.h"
+#include "Exception.h"
 #include <memory>
 #include <queue>
 
+const int MINIMUM_CARDS_NUMBER = 5;
 class Mtmchkin{
 
 public:
@@ -24,6 +34,8 @@ public:
     *      A new instance of Mtmchkin.
     */
     explicit Mtmchkin(const std::string &fileName);
+
+    virtual ~Mtmchkin() = default;
     
     /*
     * Play the next Round of the game - according to the instruction in the exercise document.
@@ -58,10 +70,13 @@ public:
     */
     int getNumberOfRounds() const;
 
+    int getPlayerRank(const std::shared_ptr<Player> wanted) const;
+
+
 private:
-    Queue<Card> m_deck;
+    Queue<std::shared_ptr<Card>> m_deck;
     Queue<std::shared_ptr<Player>> m_team;
-    int m_rounds = 1;
+    int m_rounds = 0;
     std::shared_ptr<Player>* m_leaderboard;
 };
 

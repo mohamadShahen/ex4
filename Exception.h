@@ -5,61 +5,59 @@
 #include "utilities.h"
 
 class DeckFileNotFound: public std::exception{
-    
+private:
+    std::string m_message;
+
 public:
-    DeckFileNotFound() = default;
+    DeckFileNotFound(const std::string& message):
+    m_message(message)
+    {}
     DeckFileNotFound(const DeckFileNotFound&) = default;
     DeckFileNotFound& operator=(const DeckFileNotFound&) = default;
     ~DeckFileNotFound() = default;
 
-    const char* what() const noexcept override;
+    const char* what() const noexcept override
+    {
+        return m_message.c_str();
+    }
 };
 
 class DeckFileFormatError: public std::exception{
-    
-    int m_line;
-    
+private:
+    std::string m_message;
+
 public:
-    DeckFileFormatError(const int line):
-    m_line(line)
-    {}
+    DeckFileFormatError(const std::string& message, const int& line):
+    m_message(message)
+    {
+        m_message += std::to_string(line);
+    }
     DeckFileFormatError(const DeckFileFormatError&) = default;
     DeckFileFormatError& operator=(const DeckFileFormatError&) = default;
     ~DeckFileFormatError() = default;
 
-    const char* what() const noexcept override;
+    const char* what() const noexcept override
+    {
+        return m_message.c_str();
+    }
 };
 
 class DeckFileInvalidSize: public std::exception{
-    
+private:
+    std::string m_message;
+
 public:
-    DeckFileInvalidSize() = default;
+    DeckFileInvalidSize(const std::string& message):
+    m_message(message)
+    {}
     DeckFileInvalidSize(const DeckFileInvalidSize&) = default;
     DeckFileInvalidSize& operator=(const DeckFileInvalidSize&) = default;
     ~DeckFileInvalidSize() =default;
 
-    const char* what() const noexcept override;
+    const char* what() const noexcept override
+    {
+        return m_message.c_str();
+    }
 };
-
-/***********************************************************************************************************************
- *                              Implementation of what() in all subclasses
- **********************************************************************************************************************/
-
-const char* DeckFileNotFound::what() const noexcept
-{
-    return "Deck File Error: File not found";
-}
-
-const char* DeckFileFormatError::what() const noexcept
-{
-    std::string message = "Deck File Error: File format error in line ";
-    message += std::to_string(m_line);
-    return message.c_str();
-}
-
-const char* DeckFileInvalidSize::what() const noexcept
-{
-    return "Deck File Error: Deck size is invalid";
-}
 
 #endif //PLAYER_CPP_EXCEPTIONS_H

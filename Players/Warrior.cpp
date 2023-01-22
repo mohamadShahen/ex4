@@ -6,12 +6,12 @@ Warrior::Warrior(const string& name):
 Player(name)
 {}
 
-int Warrior::getAttackStrength() const
+const int& Warrior::getAttackStrength() const
 {
-    return m_force*2 + m_level;
+    return (m_force*2 + m_level);
 }
 
-std::string Warrior::getType() const
+const string& Warrior::getType() const
 {
     return WARRIOR;
 }

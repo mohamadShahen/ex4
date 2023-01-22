@@ -1,16 +1,24 @@
 
 #include "Dragon.h"
-Dragon::Dragon() : Battle(m_type, m_force, m_damage, m_loot){}
 
-//void Dragon::applyEncounter(Player &player) const
-//{
-//    if (player.getAttackStrength() >= m_force){
-//        player.addCoins(m_loot);
-//        printWinBattle(player.m_name, m_name);
-//    }
-//    else{
-//        printLossBattle(player.m_name, m_name);
-//        player.damage(m_damage);
-//        // might need to implement a player check after each encounter so as to end or continue the game
-//    }
-//}
+Dragon::Dragon() :
+Battle(DRAGON, DRAGON_FORCE, DRAGON_DAMAGE, DRAGON_LOOT)
+{}
+
+void Dragon::applyEncounter(Player& player) const
+{
+    if (player.getAttackStrength() >= m_force){
+        player.levelUp();
+        player.addCoins(m_loot);
+        printWinBattle(player.getName(), DRAGON);
+    }
+    else{
+        player.damage(m_damage);
+        printLossBattle(player.getName(), DRAGON);
+    }
+}
+
+const std::string& Dragon::getType() const
+{
+    return DRAGON;
+}

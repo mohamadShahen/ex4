@@ -1,7 +1,7 @@
 
 #include "Barfight.h"
 
-Barfight::Barfight() : Card(BARFIGHT){}
+Barfight::Barfight() : Card(){}
 
 void Barfight::applyEncounter(Player &player) const
 {
@@ -11,4 +11,9 @@ void Barfight::applyEncounter(Player &player) const
     }
     player.damage(BARFIGHT_DAMAGE);
     printBarfightMessage(false);
+}
+
+const std::string& Barfight::getType() const
+{
+    return BARFIGHT;
 }

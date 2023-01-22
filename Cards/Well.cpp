@@ -1,7 +1,9 @@
 
 #include "Well.h"
 
-Well::Well() : Card(WELL){}
+Well::Well() :
+Card()
+{}
 
 void Well::applyEncounter(Player &player) const
 {
@@ -11,4 +13,9 @@ void Well::applyEncounter(Player &player) const
     }
     player.damage(WELL_DAMAGE);
     printWellMessage(false);
+}
+
+const std::string& Well::getType() const
+{
+    return WELL;
 }

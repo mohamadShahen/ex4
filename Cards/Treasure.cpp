@@ -1,10 +1,17 @@
 
 #include "Treasure.h"
 
-Treasure::Treasure() : Card(TREASURE){}
+Treasure::Treasure() :
+Card()
+{}
 
 
 void Treasure::applyEncounter(Player &player) const
 {
-    player.addCoins(m_coins);
+    player.addCoins(TREASURE_COINS);
+}
+
+const std::string& Treasure::getType() const
+{
+    return TREASURE;
 }
