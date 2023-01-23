@@ -10,7 +10,7 @@ class Barfight : public Card {
     std::string m_name = "Barfight";
 public:
     Barfight();
-    ~Barfight() = default;
+    virtual ~Barfight() = default;
     void applyEncounter(Player &player) const override;
     const std::string& getType() const override;
 };

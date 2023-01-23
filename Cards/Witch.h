@@ -11,7 +11,7 @@ const int WITCH_DAMAGE = 10;
 class Witch : public Battle{
 public:
     Witch();
-    ~Witch() = default;
+    virtual ~Witch() = default;
     const std::string& getType() const override;
     void applyEncounter(Player& player) const override;
 };

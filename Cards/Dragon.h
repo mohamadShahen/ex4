@@ -11,7 +11,7 @@ const int DRAGON_DAMAGE = 100;
 class Dragon : public Battle{
 public:
     Dragon();
-    ~Dragon() = default;
+    virtual ~Dragon() = default;
     void applyEncounter(Player& player) const override;
     const std::string& getType() const override;
 };

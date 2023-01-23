@@ -13,7 +13,7 @@ const int FORCE_BOOST = 2;
 class Merchant : public Card{
 public:
     Merchant();
-    ~Merchant() = default ;
+    virtual ~Merchant() = default ;
     void applyEncounter(Player &player) const override;
     const std::string& getType() const override;
 };

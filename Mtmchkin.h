@@ -36,8 +36,8 @@ public:
     */
     explicit Mtmchkin(const std::string &fileName);
 
-    virtual ~Mtmchkin() = default;
-    
+    ~Mtmchkin() = default;
+    x
     /*
     * Play the next Round of the game - according to the instruction in the exercise document.
     *

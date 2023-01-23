@@ -9,7 +9,7 @@ public:
     explicit Healer(const std::string&);
     Healer(const Healer&) = default;
     Healer& operator=(const Healer&) = default;
-    ~Healer() = default;
+    virtual ~Healer() = default;
     void heal(const int&) override;
     const std::string& getType() const override;
 };

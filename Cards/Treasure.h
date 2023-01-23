@@ -7,7 +7,7 @@ const int TREASURE_COINS = 10;
 class Treasure : public Card{
 public:
     Treasure();
-    ~Treasure() = default;
+    virtual ~Treasure() = default;
     void applyEncounter(Player &player) const override;
     const std::string& getType() const override;
 };
