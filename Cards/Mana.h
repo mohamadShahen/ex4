@@ -10,7 +10,7 @@ class Mana : public Card{
 
 public:
     Mana();
-    ~Mana() = default;
+    virtual ~Mana() = default;
     void applyEncounter(Player &player) const override;
     const std::string& getType() const override;
 };

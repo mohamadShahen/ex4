@@ -24,7 +24,7 @@ protected:
 public:
     Player (const std::string&);
     Player (const Player&) = default;
-    ~Player () = default;
+    virtual ~Player () = default;
     Player& operator= (const Player&) = default;
     void levelUp ();
     const int& getLevel () const;

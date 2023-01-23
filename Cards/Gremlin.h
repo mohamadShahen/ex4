@@ -11,7 +11,7 @@ const int GREMLIN_DAMAGE = 10;
 class Gremlin : public Battle{
 public:
     Gremlin();
-    ~Gremlin() = default;
+    virtual ~Gremlin() = default;
     void applyEncounter(Player& player) const override;
     const std::string& getType() const override;
 };

@@ -19,7 +19,7 @@ class Card {
 public:
     Card() = default;
     Card(const Card&) = default;
-    ~Card() = default;
+    virtual ~Card() = default;
     Card& operator=(const Card& other) = default;
     virtual void applyEncounter(Player& player) const = 0;
     virtual const std::string& getType() const = 0;

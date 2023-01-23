@@ -9,7 +9,7 @@ public:
     explicit Ninja(const std::string&);
     Ninja(const Ninja&) = default;
     Ninja& operator=(const Ninja&) = default;
-    ~Ninja() = default;
+    virtual ~Ninja() = default;
     void addCoins(const int&) override;
     const std::string& getType() const override;
 };
