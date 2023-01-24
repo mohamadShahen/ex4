@@ -3,13 +3,21 @@
 
 using namespace std;
 
-void rotate(shared_ptr<Player>* leaderboard, int source, int dest);
-
-void swapPtr(shared_ptr<Player> one, shared_ptr<Player> two)
+void rotate(shared_ptr<Player>* leaderboard, int source, int dest)
 {
-    shared_ptr<Player> temp = one;
-    one = two;
-    two = temp;
+    if (source == dest){
+        return;
+    }
+    if (source < dest) {
+        for (int i = source; i < dest; ++i) {
+            leaderboard[i].swap(leaderboard[i + 1]);
+        }
+    }
+    if (source > dest) {
+        for (int i = source; i > dest; --i) {
+            leaderboard[i].swap(leaderboard[i - 1]);
+        }
+    }
 }
 
 shared_ptr<Player> createPlayer(const std::string& name, const std::string& type)
@@ -29,12 +37,12 @@ shared_ptr<Player> createPlayer(const std::string& name, const std::string& type
 void insertPlayers(Queue<shared_ptr<Player>>& team, shared_ptr<Player>*& leaderboard)
 {
     printEnterTeamSizeMessage();
-    char size;
-    for (cin >> size; !((size - '0') >= 2 && (size - '0') <= 6) ; cin >> size) {
+    string size;
+    for (cin >> size; !((size[0] - '0') >= MIN_PLAYERS && (size[0] - '0') <= MAX_PLAYERS) || size.length() > 1 ; cin >> size) {
         printInvalidTeamSize();
     }
-    leaderboard = new shared_ptr<Player>[size];
-    for (int i = 0; i < size - '0'; ++i) {
+    leaderboard = new shared_ptr<Player>[size[0] - '0'];
+    for (int i = 0; i < size[0] - '0'; ++i) {
         printInsertPlayerMessage();
         string name,type;
         for (cin >> name,cin >> type;;cin >> name,cin >> type)
@@ -108,7 +116,7 @@ void insertCards(Queue<shared_ptr<Card>>& deck, const string& fileName)
             deck.pushBack(createCard(line));
         }
         file.close();
-        if (lineNum < MINIMUM_CARDS_NUMBER)
+        if (lineNum < MIN_CARDS)
         {
             throw DeckFileInvalidSize("Deck File Error: Deck size is invalid");
         }
@@ -126,61 +134,68 @@ Mtmchkin::Mtmchkin(const string& fileName)
     printStartGameMessage();
     insertCards(m_deck,fileName);
     insertPlayers(m_team,m_leaderboard);
+    m_size = m_team.size();
 }
 
 void Mtmchkin::playRound()
 {
-
-    int first = 0, last = m_team.size();
-    printRoundStartMessage(m_rounds + 1);
-    for (shared_ptr<Player> player : m_team) {
-        if(!(player->isKnockedOut()) && player->getLevel() < LAST_LEVEL) {
-            printTurnStartMessage(player->getName());
-            m_deck.front()->applyEncounter(*player);
-
-            if (player->isKnockedOut()) {
-                rotate(m_leaderboard, (getPlayerRank(player)), last);
-                --last;
-            }
-            if (player->getLevel() == LAST_LEVEL){
-                rotate(m_leaderboard, getPlayerRank(player), first);
-                ++first;
-            }
-
-            m_deck.pushBack(m_deck.front());
-            m_deck.popFront();
+    int first = 0, last = m_team.size() - 1;
+    for (int i = 0; i < m_size; ++i){
+        if (m_leaderboard[i]->getLevel() == LAST_LEVEL)
+        {
+            ++first;
+            ++last;
         }
+    }
+    printRoundStartMessage(m_rounds + 1);
+    for (int i = 0; i < m_team.size(); ++i) {
+        printTurnStartMessage(m_team.front()->getName());
+        m_deck.front()->applyEncounter(*(m_team.front()));
+        if (m_team.front()->isKnockedOut()) {
+            rotate(m_leaderboard, (getPlayerRank(m_team.front())), last);
+            m_team.popFront();
+            --last;
+            --i;
+        } else if (m_team.front()->getLevel() == LAST_LEVEL) {
+            rotate(m_leaderboard, getPlayerRank(m_team.front()), first);
+            m_team.popFront();
+            ++first;
+            --i;
+        } else if (!m_team.front()->isKnockedOut() && m_team.front()->getLevel() <= LAST_LEVEL) {
+            m_team.pushBack(m_team.front());
+            m_team.popFront();
+        }
+        m_deck.pushBack(m_deck.front());
+        m_deck.popFront();
     }
     if (isGameOver()){
         printGameEndMessage();
+        return;
     }
     m_rounds++;
 }
 
 bool Mtmchkin::isGameOver() const
 {
-    for (shared_ptr<Player> player : m_team){
-        if(!(player->isKnockedOut()) && player->getLevel() < LAST_LEVEL){
-            return false;
-        }
+    if(m_team.size() == 0){
+        return true;
     }
-    return true;
+    return false;
 }
+
 int Mtmchkin::getNumberOfRounds() const
 {
     return m_rounds;
 }
+
 int Mtmchkin::getPlayerRank(const shared_ptr<Player> wanted) const
 {
-    int i = 0;
-    for (shared_ptr<Player> player : m_team) {
-        if (player->getName() == wanted->getName() && player->getType() == wanted->getType()){ // here is the part where 2 players with the same name and class should be checked
+    for (int i = 0; i < m_size ; ++i) {
+        if (m_leaderboard[i]->getName() == wanted->getName() && m_leaderboard[i]->getType() == wanted->getType()){
             return i;
         }
-        i++;
     }
     throw std::invalid_argument("invalid argument");
-    //not sure whether there should be an exception here for if the player entered exists in the team
 }
 
 
@@ -188,24 +203,7 @@ int Mtmchkin::getPlayerRank(const shared_ptr<Player> wanted) const
 void Mtmchkin::printLeaderBoard() const
 {
     printLeaderBoardStartMessage();
-    for (shared_ptr<Player> player : m_team) {
-        printPlayerLeaderBoard(getPlayerRank(player) + 1, *player); ///gotta get rid of the 1
-    }
-}
-
-void rotate(shared_ptr<Player>* leaderboard, int source, int dest)
-{
-    if (source == dest){
-        return;
-    }
-    if (source < dest) {
-        for (int i = source; i < dest; ++i) {
-            leaderboard[source].swap(leaderboard[source + 1]);
-        }
-    }
-    if (source > dest) {
-        for (int i = source; i > dest; --i) {
-            leaderboard[source].swap(leaderboard[source - 1]);
-        }
+    for (int i = 0; i < m_size ; ++i) {
+        printPlayerLeaderBoard(getPlayerRank(m_leaderboard[i]) + 1, *m_leaderboard[i]);
     }
 }

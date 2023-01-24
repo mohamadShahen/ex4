@@ -2,7 +2,7 @@
 #ifndef EX2_PLAYER_H
 #define EX2_PLAYER_H
 
-#include "../tool/HealthPoints.h"
+#include "../extra/HealthPoints.h"
 #include <memory>
 
 const int DEFAULT_FORCE = 5;

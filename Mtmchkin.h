@@ -16,13 +16,16 @@
 #include "Cards/Treasure.h"
 #include "Cards/Well.h"
 #include "Cards/Witch.h"
-#include "tool/Queue.h"
-#include "tool/HealthPoints.h"
+#include "extra/Queue.h"
+#include "extra/HealthPoints.h"
 #include "Exception.h"
 #include <memory>
 #include <queue>
 
-const int MINIMUM_CARDS_NUMBER = 5;
+const int MIN_CARDS = 5;
+const int MAX_PLAYERS = 6;
+const int MIN_PLAYERS = 2;
+
 class Mtmchkin{
 
 public:
@@ -37,7 +40,6 @@ public:
     explicit Mtmchkin(const std::string &fileName);
 
     ~Mtmchkin() = default;
-    x
     /*
     * Play the next Round of the game - according to the instruction in the exercise document.
     *
@@ -78,6 +80,7 @@ private:
     Queue<std::shared_ptr<Card>> m_deck;
     Queue<std::shared_ptr<Player>> m_team;
     int m_rounds = 0;
+    int m_size;
     std::shared_ptr<Player>* m_leaderboard;
 };
 
